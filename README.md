@@ -5,7 +5,7 @@ At first, this project was a typical project with Spring JPA (and Hibernate) for
 
 But now, this project was converted to use JTA and Narayana.
 
-Changes to convert this proyect:
+Changes to convert this project:
 
 1. Add dependencies to pom.xml: spring-tx, jta, jbossjta and narayana-jta.
 2. Change MySQL driver to XA implementation support.
