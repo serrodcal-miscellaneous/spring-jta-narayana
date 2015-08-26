@@ -3,7 +3,7 @@ Spring project with JTA, JPA, Hibernate and Narayana
 
 At first, this project was a typical project with Spring JPA (and Hibernate) for MySQL DB with transactions.
 
-But now, thss project was converted to use JTA and Narayana.
+But now, this project was converted to use JTA and Narayana.
 
 Changes to convert this proyect:
 
