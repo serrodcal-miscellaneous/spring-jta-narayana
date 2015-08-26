@@ -55,9 +55,6 @@
 		
 	</bean>
 	
-	<!-- bean id="narayanaTransactionManager" class="com.arjuna.ats.internal.jta.transaction.arjunacore.TransactionManagerImple" />
-	<bean id="narayanaUserTransaction" class="com.arjuna.ats.internal.jta.transaction.arjunacore.UserTransactionImple" /-->
-	
 	<tx:annotation-driven transaction-manager="transactionManager"></tx:annotation-driven>
 	
 
