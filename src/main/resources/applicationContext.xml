@@ -52,7 +52,6 @@
 		<property name="userTransaction">
 			<bean class="com.arjuna.ats.internal.jta.transaction.arjunacore.UserTransactionImple" />
 		</property>
-		
 	</bean>
 	
 	<tx:annotation-driven transaction-manager="transactionManager"></tx:annotation-driven>
