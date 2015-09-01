@@ -11,3 +11,5 @@ Changes to convert this project:
 2. Change MySQL driver to XA implementation support.
 3. Add to applicationContext.xml transactionManager references and comment old transactionManager setting.
 4. To indicate transaction-manager in tx:annotation-driven in applicationContext.xml.
+
+Additionally contains: Log4J (according to: http://spring.io/blog/2009/12/04/logging-dependencies-in-spring/)
