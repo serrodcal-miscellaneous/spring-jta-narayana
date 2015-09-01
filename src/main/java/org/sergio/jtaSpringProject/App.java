@@ -1,4 +1,4 @@
-package org.sergio.jtaSpringProject.jtaSpringProject;
+package org.sergio.jtaSpringProject;
 
 import org.sergio.jtaSpringProject.entities.Animal;
 import org.sergio.jtaSpringProject.entities.Person;
