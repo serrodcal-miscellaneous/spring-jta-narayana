@@ -1,5 +1,6 @@
 package org.sergio.jtaSpringProject.entities;
 
+import java.util.LinkedList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -23,6 +24,7 @@ public class Client {
 	
 	public Client(){
 		super();
+		this.transfers = new LinkedList<Transfer>();
 	}
 
 	@Id
