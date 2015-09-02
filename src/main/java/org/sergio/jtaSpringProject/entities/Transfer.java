@@ -18,6 +18,8 @@ public class Transfer {
 	
 	private Date date;
 	
+	private String concept;
+	
 	private Double amount;
 	
 	private Client originClient;
@@ -46,6 +48,15 @@ public class Transfer {
 
 	public void setDate(Date date) {
 		this.date = date;
+	}
+
+	@Column
+	public String getConcept() {
+		return concept;
+	}
+
+	public void setConcept(String concept) {
+		this.concept = concept;
 	}
 
 	@Column(precision=10, scale=2)
@@ -77,14 +88,10 @@ public class Transfer {
 	
 	//Bussiness model method
 	
-	public boolean makeTransfer(){
-		boolean res = false;
-		
-		res = this.originClient.subAmount(this.amount);
-		if(res)
-			res = this.targetClient.sumAmount(this.amount);
-		
-		return res;
+	public void makeTransfer() throws Exception{
+		this.originClient.subAmount(this.amount);
+		this.targetClient.sumAmount(this.amount);
+
 	}
 	
 }

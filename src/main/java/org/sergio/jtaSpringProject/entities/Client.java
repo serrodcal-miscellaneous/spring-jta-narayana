@@ -105,27 +105,20 @@ public class Client {
 	
 	//Bussines model methods
 	
-	public boolean sumAmount(Double amount){
-		boolean res = true;
-		
+	public void sumAmount(Double amount) throws Exception{
 		try{
 			this.balance += amount;
 		}catch(Exception e){
-			res = false;
+			throw new Exception("Operation error: sum");
 		}
-		
-		return res;
 	}
 	
-	public boolean subAmount(Double amount){
-		boolean res = false;
-		
+	public void subAmount(Double amount) throws Exception{
 		if(this.balance >= amount){
 			this.balance -= amount;
-			res = true;
+		}else{
+			throw new Exception("Operation error: sub");
 		}
-		
-		return res;
 	}
 	
 }
