@@ -2,6 +2,7 @@ package org.sergio.jtaSpringProject.entities;
 
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -69,7 +70,7 @@ public class Transfer {
 		this.amount = amount;
 	}
 
-	@ManyToOne
+	@ManyToOne(cascade = { CascadeType.ALL })
 	public Client getOriginClient() {
 		return originClient;
 	}
@@ -78,7 +79,7 @@ public class Transfer {
 		this.originClient = originClient;
 	}
 
-	@ManyToOne
+	@ManyToOne(cascade = { CascadeType.ALL })
 	public Client getTargetClient() {
 		return targetClient;
 	}
