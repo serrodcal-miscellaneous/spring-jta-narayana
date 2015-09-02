@@ -10,7 +10,7 @@
     http://www.springframework.org/schema/data/jpa/spring-jpa.xsd
 	http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.2.xsd http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.2.xsd http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-3.2.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.2.xsd http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task-3.2.xsd">
  
- 	<context:component-scan base-package="org.sergio.jtaSpringProject.services" />
+ 	<context:component-scan base-package="org.sergio.*" />
    
 	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
     	<!-- <property name="driverClassName" value="com.mysql.jdbc.Driver" /> -->
@@ -36,14 +36,14 @@
 	
 	<jpa:repositories base-package="org.sergio.jtaSpringProject.repositories" />
 	
-	<!-- bean class="org.springframework.orm.jpa.JpaTransactionManager"
+	<bean class="org.springframework.orm.jpa.JpaTransactionManager"
         id="transactionManager">
         <property name="entityManagerFactory" ref="entityManagerFactory" />
     </bean>
     
-    <tx:annotation-driven / -->
+    <tx:annotation-driven />
     
-    <!-- JTA & Narayana -->
+    <!-- JTA & Narayana >
 	
 	<bean id="transactionManager" class="org.springframework.transaction.jta.JtaTransactionManager">
 		<property name="transactionManager">
@@ -54,7 +54,7 @@
 		</property>
 	</bean>
 	
-	<tx:annotation-driven transaction-manager="transactionManager"></tx:annotation-driven>
+	<tx:annotation-driven transaction-manager="transactionManager"></tx:annotation-driven-->
 	
 
 </beans>
