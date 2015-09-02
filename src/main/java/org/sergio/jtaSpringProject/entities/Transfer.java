@@ -8,6 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.PrePersist;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -40,7 +41,7 @@ public class Transfer {
 		this.id = id;
 	}
 
-	@Column
+	@Column(nullable = false)
 	@Temporal(TemporalType.TIMESTAMP)
 	public Date getDate() {
 		return date;
@@ -84,6 +85,11 @@ public class Transfer {
 
 	public void setTargetClient(Client targetClient) {
 		this.targetClient = targetClient;
+	}
+	
+	@PrePersist
+	public void setTimeStamp(){
+		this.date = new Date();
 	}
 	
 	//Bussiness model method
