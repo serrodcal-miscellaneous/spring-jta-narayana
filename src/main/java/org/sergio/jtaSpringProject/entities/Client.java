@@ -6,14 +6,21 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
+
+import org.apache.log4j.Logger;
+import org.sergio.jtaSpringProject.App;
 
 @Entity
 public class Client {
 
+	private static final Logger logger = Logger.getLogger(Client.class);
+	
 	private int id;
 	
 	private String name;
@@ -24,7 +31,6 @@ public class Client {
 	
 	public Client(){
 		super();
-		this.transfers = new LinkedList<Transfer>();
 	}
 
 	@Id
@@ -50,18 +56,36 @@ public class Client {
 	public Double getBalance() {
 		return balance;
 	}
-
+	
 	public void setBalance(Double balance) {
 		this.balance = balance;
 	}
 
-	@OneToMany(cascade = { CascadeType.ALL })
+	@ManyToMany
 	public List<Transfer> getTransfers() {
 		return transfers;
 	}
 
 	public void setTransfers(List<Transfer> transfers) {
 		this.transfers = transfers;
+	}
+	
+	//Bussines model methods
+	
+	public void sumAmount(Double amount) throws Exception{
+		try{
+			this.balance += amount;
+		}catch(Exception e){
+			throw new Exception("Operation error: sum");
+		}
+	}
+	
+	public void subAmount(Double amount) throws Exception{
+		if(this.balance >= amount){
+			this.balance -= amount;
+		}else{
+			throw new Exception("Operation error: sub");
+		}
 	}
 
 	@Override
@@ -76,6 +100,7 @@ public class Client {
 		result = prime * result + ((balance == null) ? 0 : balance.hashCode());
 		result = prime * result + id;
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
+		result = prime * result + ((transfers == null) ? 0 : transfers.hashCode());
 		return result;
 	}
 
@@ -100,25 +125,12 @@ public class Client {
 				return false;
 		} else if (!name.equals(other.name))
 			return false;
+		if (transfers == null) {
+			if (other.transfers != null)
+				return false;
+		} else if (!transfers.equals(other.transfers))
+			return false;
 		return true;
-	}
-	
-	//Bussines model methods
-	
-	public void sumAmount(Double amount) throws Exception{
-		try{
-			this.balance += amount;
-		}catch(Exception e){
-			throw new Exception("Operation error: sum");
-		}
-	}
-	
-	public void subAmount(Double amount) throws Exception{
-		if(this.balance >= amount){
-			this.balance -= amount;
-		}else{
-			throw new Exception("Operation error: sub");
-		}
 	}
 	
 }

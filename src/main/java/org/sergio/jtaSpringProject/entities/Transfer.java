@@ -1,21 +1,27 @@
 package org.sergio.jtaSpringProject.entities;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.ManyToMany;
 import javax.persistence.PrePersist;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import org.apache.log4j.Logger;
+
 @Entity
 public class Transfer {
 
+	private static final Logger logger = Logger.getLogger(Transfer.class);
+	
 	private int id;
 	
 	private Date date;
@@ -24,9 +30,7 @@ public class Transfer {
 	
 	private Double amount;
 	
-	private Client originClient;
-	
-	private Client targetClient;
+	private List<Client> clients;
 	
 	public Transfer(){
 		super();
@@ -42,7 +46,7 @@ public class Transfer {
 		this.id = id;
 	}
 
-	@Column(nullable = false)
+	@Column
 	@Temporal(TemporalType.TIMESTAMP)
 	public Date getDate() {
 		return date;
@@ -69,42 +73,31 @@ public class Transfer {
 	public void setAmount(Double amount) {
 		this.amount = amount;
 	}
-
-	@ManyToOne(cascade = { CascadeType.ALL })
-	public Client getOriginClient() {
-		return originClient;
-	}
-
-	public void setOriginClient(Client originClient) {
-		this.originClient = originClient;
-	}
-
-	@ManyToOne(cascade = { CascadeType.ALL })
-	public Client getTargetClient() {
-		return targetClient;
-	}
-
-	public void setTargetClient(Client targetClient) {
-		this.targetClient = targetClient;
-	}
 	
 	@PrePersist
 	public void setTimeStamp(){
 		this.date = new Date();
 	}
 	
+	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	public List<Client> getClients() {
+		return clients;
+	}
+
+	public void setClients(List<Client> clients) {
+		this.clients = clients;
+	}
+	
 	//Bussiness model method
 	
 	public void makeTransfer() throws Exception{
-		this.originClient.subAmount(this.amount);
-		this.targetClient.sumAmount(this.amount);
-
+		this.clients.get(0).subAmount(this.amount);
+		this.clients.get(1).sumAmount(this.amount);
 	}
 
 	@Override
 	public String toString() {
-		return "Transfer [id=" + id + ", date=" + date + ", concept=" + concept + ", amount=" + amount
-				+ ", originClient=" + originClient + ", targetClient=" + targetClient + "]";
+		return "Transfer [id=" + id + ", date=" + date + ", concept=" + concept + ", amount=" + amount + "]";
 	}
 
 	@Override
@@ -112,11 +105,10 @@ public class Transfer {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((amount == null) ? 0 : amount.hashCode());
+		result = prime * result + ((clients == null) ? 0 : clients.hashCode());
 		result = prime * result + ((concept == null) ? 0 : concept.hashCode());
 		result = prime * result + ((date == null) ? 0 : date.hashCode());
 		result = prime * result + id;
-		result = prime * result + ((originClient == null) ? 0 : originClient.hashCode());
-		result = prime * result + ((targetClient == null) ? 0 : targetClient.hashCode());
 		return result;
 	}
 
@@ -134,6 +126,11 @@ public class Transfer {
 				return false;
 		} else if (!amount.equals(other.amount))
 			return false;
+		if (clients == null) {
+			if (other.clients != null)
+				return false;
+		} else if (!clients.equals(other.clients))
+			return false;
 		if (concept == null) {
 			if (other.concept != null)
 				return false;
@@ -146,17 +143,9 @@ public class Transfer {
 			return false;
 		if (id != other.id)
 			return false;
-		if (originClient == null) {
-			if (other.originClient != null)
-				return false;
-		} else if (!originClient.equals(other.originClient))
-			return false;
-		if (targetClient == null) {
-			if (other.targetClient != null)
-				return false;
-		} else if (!targetClient.equals(other.targetClient))
-			return false;
 		return true;
 	}
+
+	
 	
 }

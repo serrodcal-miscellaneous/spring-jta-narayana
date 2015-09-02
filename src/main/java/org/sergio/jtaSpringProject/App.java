@@ -1,13 +1,14 @@
 package org.sergio.jtaSpringProject;
 
-import org.sergio.jtaSpringProject.entities.Animal;
+import java.util.LinkedList;
+import java.util.List;
+
 import org.sergio.jtaSpringProject.entities.Client;
-import org.sergio.jtaSpringProject.entities.Person;
 import org.sergio.jtaSpringProject.entities.Transfer;
 import org.sergio.jtaSpringProject.services.AppService;
-import org.sergio.jtaSpringProject.services.PersonService;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.apache.log4j.Logger;
 
 /**
  * Hello world!
@@ -15,51 +16,82 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
  */
 public class App 
 {
+	
+	private static final Logger logger = Logger.getLogger(App.class);
+	
     public static void main( String[] args )
     {
+		if(logger.isDebugEnabled()){
+			logger.debug("Init POC");
+		}
         System.out.println( "Test Execution" );
         System.out.println("---------------");
         
         ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
         
-        test1(context);
-        test2(context);
+        if(context != null){
+        	if(logger.isDebugEnabled()){
+    			logger.debug("Get context");
+    		}
+	        test1(context);
+	        test2(context);
+        }else{
+        	logger.error("Cannot get context");
+        }
         
         System.out.println("---------------");
         System.out.println( "End Test Execution" );
+        if(logger.isDebugEnabled()){
+			logger.debug("EndPoc");
+		}
     }
 
     /*Acceso a servicios sin transacciones*/
 	private static void test1(ApplicationContext context) {
+		if(logger.isDebugEnabled()){
+			logger.debug("Init Test 1");
+		}
 		System.out.println("Begin Test 1");
 		
 		AppService appService = (AppService) context.getBean("appService");
 		
-		Client originClient = new Client();
-		originClient.setName("John Doe");
-		originClient.setBalance(100.00);
-		
-		Client targetClient = new Client();
-		targetClient.setName("Alice Doe");
-		targetClient.setBalance(1000.00);
-		
-		appService.createClient(originClient);
-		appService.createClient(targetClient);
-		
-		Transfer transfer1 = new Transfer();
-		transfer1.setConcept("Flat water bill");
-		transfer1.setAmount(30.00);
-		transfer1.setOriginClient(originClient);
-		transfer1.setTargetClient(targetClient);
-		
-		try{
-			appService.makeTransfer(transfer1);
-			System.out.println("Test 1 Success");
-		}catch (Exception e){
-			e.printStackTrace();
+		if(appService != null){
+			
+			if(logger.isDebugEnabled()){
+				logger.debug("Get AppService");
+			}
+			
+			Client originClient = new Client();
+			originClient.setName("John Doe");
+			originClient.setBalance(100.00);
+			
+			Client targetClient = new Client();
+			targetClient.setName("Alice Doe");
+			targetClient.setBalance(1000.00);
+			
+			Transfer transfer1 = new Transfer();
+			transfer1.setConcept("Flat water bill");
+			transfer1.setAmount(30.00);
+			List<Client> clients = new LinkedList<Client>();
+			clients.add(originClient);
+			clients.add(targetClient);
+			transfer1.setClients(clients);
+			
+			try{
+				appService.makeTransfer(transfer1);
+				System.out.println("Test 1 Success");
+			}catch (Exception e){
+				logger.error("Transference error");
+				System.out.println("Error realizando transferencia");
+			}
+		}else{
+			logger.error("Cannot inject AppService");
 		}
 		
 		System.out.println("End Test 1");
+		if(logger.isDebugEnabled()){
+			logger.debug("End Test 1");
+		}
 	}
 	
 	/*Acceso a servicios sin transacciones*/
@@ -76,20 +108,19 @@ public class App
 		targetClient.setName("Alice Doe");
 		targetClient.setBalance(1000.00);
 		
-		appService.createClient(originClient);
-		appService.createClient(targetClient);
-		
 		Transfer transfer1 = new Transfer();
 		transfer1.setConcept("Flat water bill");
 		transfer1.setAmount(10000.00);
-		transfer1.setOriginClient(originClient);
-		transfer1.setTargetClient(targetClient);
+		List<Client> clients = new LinkedList<Client>();
+		clients.add(originClient);
+		clients.add(targetClient);
+		transfer1.setClients(clients);
 		
 		try{
 			appService.makeTransfer(transfer1);
 			System.out.println("Test 2 Success");
 		}catch (Exception e){
-			e.printStackTrace();
+			System.out.println("Error realizando transferencia");
 		}
 		
 		System.out.println("End Test 2");
