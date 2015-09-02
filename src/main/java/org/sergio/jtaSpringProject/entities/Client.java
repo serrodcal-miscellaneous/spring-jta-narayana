@@ -101,4 +101,29 @@ public class Client {
 		return true;
 	}
 	
+	//Bussines model methods
+	
+	public boolean sumAmount(Double amount){
+		boolean res = true;
+		
+		try{
+			this.balance += amount;
+		}catch(Exception e){
+			res = false;
+		}
+		
+		return res;
+	}
+	
+	public boolean subAmount(Double amount){
+		boolean res = false;
+		
+		if(this.balance >= amount){
+			this.balance -= amount;
+			res = true;
+		}
+		
+		return res;
+	}
+	
 }

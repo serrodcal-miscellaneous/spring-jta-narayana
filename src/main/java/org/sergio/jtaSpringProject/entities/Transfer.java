@@ -75,4 +75,16 @@ public class Transfer {
 		this.targetClient = targetClient;
 	}
 	
+	//Bussiness model method
+	
+	public boolean makeTransfer(){
+		boolean res = false;
+		
+		res = this.originClient.subAmount(this.amount);
+		if(res)
+			res = this.targetClient.sumAmount(this.amount);
+		
+		return res;
+	}
+	
 }
