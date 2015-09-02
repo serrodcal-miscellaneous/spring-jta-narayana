@@ -95,8 +95,8 @@ public class Transfer {
 	public void makeTransfer() throws Exception{
 		if(logger.isTraceEnabled())
 			logger.trace("makeTransfer()");
-		this.clients.get(0).subAmount(this.amount);
 		this.clients.get(1).sumAmount(this.amount);
+		this.clients.get(0).subAmount(this.amount);
 	}
 
 	@Override
