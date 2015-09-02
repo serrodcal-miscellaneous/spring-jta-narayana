@@ -36,14 +36,14 @@
 	
 	<jpa:repositories base-package="org.sergio.jtaSpringProject.repositories" />
 	
-	<bean class="org.springframework.orm.jpa.JpaTransactionManager"
+	<!-- bean class="org.springframework.orm.jpa.JpaTransactionManager"
         id="transactionManager">
         <property name="entityManagerFactory" ref="entityManagerFactory" />
     </bean>
     
-    <tx:annotation-driven />
+    <tx:annotation-driven / -->
     
-    <!-- JTA & Narayana >
+    <!--  JTA & Narayana -->
 	
 	<bean id="transactionManager" class="org.springframework.transaction.jta.JtaTransactionManager">
 		<property name="transactionManager">
@@ -54,7 +54,7 @@
 		</property>
 	</bean>
 	
-	<tx:annotation-driven transaction-manager="transactionManager"></tx:annotation-driven-->
+	<tx:annotation-driven transaction-manager="transactionManager"></tx:annotation-driven>
 	
 
 </beans>
