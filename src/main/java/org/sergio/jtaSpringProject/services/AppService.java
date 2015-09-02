@@ -1,7 +1,9 @@
 package org.sergio.jtaSpringProject.services;
 
 import org.sergio.jtaSpringProject.entities.Animal;
+import org.sergio.jtaSpringProject.entities.Client;
 import org.sergio.jtaSpringProject.entities.Person;
+import org.sergio.jtaSpringProject.entities.Transfer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -10,19 +12,24 @@ import org.springframework.transaction.annotation.Transactional;
 public class AppService {
 
 	@Autowired
-	private PersonService personService;
+	private ClientService clientService;
 	
 	@Autowired
-	private AnimalService animalService;
+	private TransferService transferService;
 	
 	public AppService() {
 		super();
 	}
 	
 	@Transactional
-	public void createPersonAndAnimal(Person person, Animal animal){
-		this.personService.createPerson(person);
-		this.animalService.createAnimal(animal);
+	public void createClient(Client client){
+		this.clientService.saveClient(client);
+	}
+	
+	@Transactional
+	public void makeTransfer(Transfer transfer) throws Exception{
+		transfer.makeTransfer();
+		this.transferService.saveTransfer(transfer);
 	}
 	
 }
