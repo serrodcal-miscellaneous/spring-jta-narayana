@@ -79,10 +79,11 @@ public class App
 			
 			try{
 				appService.makeTransfer(transfer1);
-				System.out.println("Test 1 Success");
+				if(logger.isDebugEnabled()){
+					logger.debug("Transfer Success");
+				}
 			}catch (Exception e){
 				logger.error("Transference error");
-				System.out.println("Error realizando transferencia");
 			}
 		}else{
 			logger.error("Cannot inject AppService");
@@ -96,7 +97,9 @@ public class App
 	
 	/*Acceso a servicios sin transacciones*/
 	private static void test2(ApplicationContext context) {
-		System.out.println("Begin Test 2");
+		if(logger.isDebugEnabled()){
+			logger.debug("Begin Test 2");
+		}
 		
 		AppService appService = (AppService) context.getBean("appService");
 		
@@ -118,12 +121,17 @@ public class App
 		
 		try{
 			appService.makeTransfer(transfer1);
-			System.out.println("Test 2 Success");
+			if(logger.isDebugEnabled()){
+				logger.debug("Transfer Success");
+			}
 		}catch (Exception e){
-			System.out.println("Error realizando transferencia");
+			logger.error("Transference error");
 		}
 		
 		System.out.println("End Test 2");
+		if(logger.isDebugEnabled()){
+			logger.debug("End Test 2");
+		}
 	}
 	
 	

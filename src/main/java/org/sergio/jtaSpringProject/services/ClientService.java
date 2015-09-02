@@ -21,23 +21,48 @@ public class ClientService {
 	}
 	
 	public List<Client> getClients(){
+		if(logger.isTraceEnabled()){
+			logger.trace("getTransfers()");
+		}
 		return this.clientRepository.findAll();
 	}
 	
 	public Client getClient(int id){
+		if(logger.isTraceEnabled()){
+			logger.trace("getClient()");
+		}
 		return this.clientRepository.findOne(id);
 	}
 	
 	public void saveClient(Client client){
+		if(logger.isTraceEnabled()){
+			logger.trace("saveClient()");
+		}
 		this.clientRepository.save(client);
+		
+		if(logger.isDebugEnabled()){
+			logger.debug("Save Client");
+		}
 	}
 	
 	public void deleteClient(Client client){
+		if(logger.isTraceEnabled()){
+			logger.trace("deleteClient()");
+		}
 		this.clientRepository.delete(client);
+		if(logger.isDebugEnabled()){
+			logger.debug("Client Transfer");
+		}
 	}
 	
 	public void deleteClientById(int id){
+		if(logger.isTraceEnabled()){
+			logger.trace("deleteClientById()");
+		}
 		this.clientRepository.delete(id);
+		if(logger.isDebugEnabled()){
+			logger.debug("Client Transfer");
+		}
 	}
 	
 }

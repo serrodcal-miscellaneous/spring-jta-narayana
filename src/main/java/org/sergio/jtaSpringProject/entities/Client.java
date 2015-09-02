@@ -31,6 +31,8 @@ public class Client {
 	
 	public Client(){
 		super();
+		if(logger.isTraceEnabled())
+			logger.trace("Create client");
 	}
 
 	@Id
@@ -73,17 +75,23 @@ public class Client {
 	//Bussines model methods
 	
 	public void sumAmount(Double amount) throws Exception{
+		if(logger.isTraceEnabled())
+			logger.trace("sumAmount");
 		try{
 			this.balance += amount;
 		}catch(Exception e){
+			logger.trace("sumAmount Error");
 			throw new Exception("Operation error: sum");
 		}
 	}
 	
 	public void subAmount(Double amount) throws Exception{
+		if(logger.isTraceEnabled())
+			logger.trace("subAmount");
 		if(this.balance >= amount){
 			this.balance -= amount;
 		}else{
+			logger.trace("subAmount Error");
 			throw new Exception("Operation error: sub");
 		}
 	}

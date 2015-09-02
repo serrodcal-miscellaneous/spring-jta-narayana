@@ -21,23 +21,47 @@ public class TransferService {
 	}
 	
 	public List<Transfer> getTransfers(){
+		if(logger.isTraceEnabled()){
+			logger.trace("getTransfers()");
+		}
 		return this.transferRepository.findAll();
 	}
 	
 	public Transfer getTransfer(int id){
+		if(logger.isTraceEnabled()){
+			logger.trace("getTransfer()");
+		}
 		return this.transferRepository.findOne(id);
 	}
 	
 	public void saveTransfer(Transfer transfer){
+		if(logger.isTraceEnabled()){
+			logger.trace("saveTransfer()");
+		}
 		this.transferRepository.save(transfer);
+		if(logger.isDebugEnabled()){
+			logger.debug("Save Transfer");
+		}
 	}
 	
 	public void deleteTransfer(Transfer transfer){
+		if(logger.isTraceEnabled()){
+			logger.trace("deleteTransfer()");
+		}
 		this.transferRepository.delete(transfer);
+		if(logger.isDebugEnabled()){
+			logger.debug("Delete Transfer");
+		}
 	}
 	
 	public void deleteTransferById(int id){
+		if(logger.isTraceEnabled()){
+			logger.trace("deleteTransferById()");
+		}
 		this.transferRepository.delete(id);
+		if(logger.isDebugEnabled()){
+			logger.debug("Delete Transfer");
+		}
 	}
 	
 }

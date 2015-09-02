@@ -29,14 +29,14 @@ public class AppService {
 	
 	@Transactional
 	public void makeTransfer(Transfer transfer) throws Exception{
-//		Client originClient = transfer.getOriginClient();
-//		Client targetClient = transfer.getTargetClient();
-//		originClient.subAmount(transfer.getAmount());
-//		targetClient.sumAmount(transfer.getAmount());
-//		this.clientService.saveClient(originClient);
-//		this.clientService.saveClient(targetClient);
+		if(logger.isDebugEnabled()){
+			logger.debug("Begin transfer");
+		}
 		transfer.makeTransfer();
 		this.transferService.saveTransfer(transfer);
+		if(logger.isDebugEnabled()){
+			logger.debug("Complete transfer");
+		}
 	}
 	
 }

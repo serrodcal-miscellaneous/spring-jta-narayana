@@ -34,6 +34,8 @@ public class Transfer {
 	
 	public Transfer(){
 		super();
+		if(logger.isTraceEnabled())
+			logger.trace("Create transfer");
 	}
 
 	@Id
@@ -91,6 +93,8 @@ public class Transfer {
 	//Bussiness model method
 	
 	public void makeTransfer() throws Exception{
+		if(logger.isTraceEnabled())
+			logger.trace("makeTransfer()");
 		this.clients.get(0).subAmount(this.amount);
 		this.clients.get(1).sumAmount(this.amount);
 	}
