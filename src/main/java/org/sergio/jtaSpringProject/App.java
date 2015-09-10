@@ -21,17 +21,17 @@ public class App
 	
     public static void main( String[] args )
     {
-		if(logger.isDebugEnabled()){
-			logger.debug("Init POC");
+		if(logger.isTraceEnabled()){
+			logger.trace("BEGIN MAIN: main( String[] args )");
 		}
-        System.out.println( "Test Execution" );
-        System.out.println("---------------");
+//        System.out.println( "Test Execution" );
+//        System.out.println("---------------");
         
         ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
         
         if(context != null){
-        	if(logger.isDebugEnabled()){
-    			logger.debug("Get context");
+        	if(logger.isTraceEnabled()){
+    			logger.trace("context != null");
     		}
 	        test1(context);
 	        //test2(context);
@@ -39,10 +39,10 @@ public class App
         	logger.error("Cannot get context");
         }
         
-        System.out.println("---------------");
-        System.out.println( "End Test Execution" );
-        if(logger.isDebugEnabled()){
-			logger.debug("EndPoc");
+//        System.out.println("---------------");
+//        System.out.println( "End Test Execution" );
+        if(logger.isTraceEnabled()){
+			logger.trace("END MAIN");
 		}
     }
 

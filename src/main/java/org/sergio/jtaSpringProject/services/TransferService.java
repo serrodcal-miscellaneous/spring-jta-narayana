@@ -39,9 +39,6 @@ public class TransferService {
 			logger.trace("saveTransfer()");
 		}
 		this.transferRepository.save(transfer);
-		if(logger.isDebugEnabled()){
-			logger.debug("Save Transfer");
-		}
 	}
 	
 	public void deleteTransfer(Transfer transfer){
@@ -49,9 +46,6 @@ public class TransferService {
 			logger.trace("deleteTransfer()");
 		}
 		this.transferRepository.delete(transfer);
-		if(logger.isDebugEnabled()){
-			logger.debug("Delete Transfer");
-		}
 	}
 	
 	public void deleteTransferById(int id){
@@ -59,9 +53,6 @@ public class TransferService {
 			logger.trace("deleteTransferById()");
 		}
 		this.transferRepository.delete(id);
-		if(logger.isDebugEnabled()){
-			logger.debug("Delete Transfer");
-		}
 	}
 	
 }

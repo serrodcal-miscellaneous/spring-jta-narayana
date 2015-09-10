@@ -35,58 +35,80 @@ public class Transfer {
 	public Transfer(){
 		super();
 		if(logger.isTraceEnabled())
-			logger.trace("Create transfer");
+			logger.trace("Transfer()");
 	}
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	public int getId() {
+		if(logger.isTraceEnabled())
+			logger.trace("getId()");
 		return id;
 	}
 
 	public void setId(int id) {
+		if(logger.isTraceEnabled())
+			logger.trace("setId(int id)");
 		this.id = id;
 	}
 
 	@Column
 	@Temporal(TemporalType.TIMESTAMP)
 	public Date getDate() {
+		if(logger.isTraceEnabled())
+			logger.trace("getDate()");
 		return date;
 	}
 
 	public void setDate(Date date) {
+		if(logger.isTraceEnabled())
+			logger.trace("setDate(Date date)");
 		this.date = date;
 	}
 
 	@Column
 	public String getConcept() {
+		if(logger.isTraceEnabled())
+			logger.trace("getConcept()");
 		return concept;
 	}
 
 	public void setConcept(String concept) {
+		if(logger.isTraceEnabled())
+			logger.trace("setConcept(String concept)");
 		this.concept = concept;
 	}
 
 	@Column(precision=10, scale=2)
 	public Double getAmount() {
+		if(logger.isTraceEnabled())
+			logger.trace("getAmount()");
 		return amount;
 	}
 
 	public void setAmount(Double amount) {
+		if(logger.isTraceEnabled())
+			logger.trace("setAmount(Double amount)");
 		this.amount = amount;
 	}
 	
 	@PrePersist
 	public void setTimeStamp(){
+		if(logger.isTraceEnabled())
+			logger.trace("setTimeStamp()");
 		this.date = new Date();
 	}
 	
 	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	public List<Client> getClients() {
+		if(logger.isTraceEnabled())
+			logger.trace("getClients()");
 		return clients;
 	}
 
 	public void setClients(List<Client> clients) {
+		if(logger.isTraceEnabled())
+			logger.trace("setClients(List<Client> clients) ");
 		this.clients = clients;
 	}
 	
@@ -101,6 +123,8 @@ public class Transfer {
 
 	@Override
 	public String toString() {
+		if(logger.isTraceEnabled())
+			logger.trace("toString()");
 		return "Transfer [id=" + id + ", date=" + date + ", concept=" + concept + ", amount=" + amount + "]";
 	}
 

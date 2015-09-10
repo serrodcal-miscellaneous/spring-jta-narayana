@@ -31,44 +31,69 @@ public class Client {
 	
 	public Client(){
 		super();
-		if(logger.isTraceEnabled())
-			logger.trace("Create client");
+		if(logger.isTraceEnabled()){
+			logger.trace("Client()");
+		}
 	}
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	public int getId() {
+		if(logger.isTraceEnabled()){
+			logger.trace("getId()");
+		}
 		return id;
 	}
 
 	public void setId(int id) {
+		if(logger.isTraceEnabled()){
+			logger.trace("setId(int id)");
+		}
 		this.id = id;
 	}
 
 	@Column
 	public String getName() {
+		if(logger.isTraceEnabled()){
+			logger.trace("getName()");
+		}
 		return name;
 	}
 
 	public void setName(String name) {
+		if(logger.isTraceEnabled()){
+			logger.trace("setName(String name)");
+		}
 		this.name = name;
 	}
 
 	@Column(precision=10, scale=2)
 	public Double getBalance() {
+		if(logger.isTraceEnabled()){
+			logger.trace("getBalance()");
+		}
 		return balance;
 	}
 	
 	public void setBalance(Double balance) {
+		if(logger.isTraceEnabled()){
+			logger.trace("setBalance(Double balance)");
+		}
 		this.balance = balance;
 	}
 
 	@ManyToMany(mappedBy = "clients")
 	public List<Transfer> getTransfers() {
+		if(logger.isTraceEnabled()){
+			logger.trace("getTransfers()");
+		}
 		return transfers;
 	}
 
 	public void setTransfers(List<Transfer> transfers) {
+		if(logger.isTraceEnabled()){
+			logger.trace("setTransfers(List<Transfer> transfers)");
+		}
 		this.transfers = transfers;
 	}
 	
@@ -76,28 +101,30 @@ public class Client {
 	
 	public void sumAmount(Double amount) throws Exception{
 		if(logger.isTraceEnabled())
-			logger.trace("sumAmount");
+			logger.trace("sumAmount(Double amount)");
 		try{
 			this.balance += amount;
 		}catch(Exception e){
-			logger.trace("sumAmount Error");
+			logger.error("sumAmount Error");
 			throw new Exception("Operation error: sum");
 		}
 	}
 	
 	public void subAmount(Double amount) throws Exception{
 		if(logger.isTraceEnabled())
-			logger.trace("subAmount");
+			logger.trace("subAmount(Double amount)");
 		if(this.balance >= amount){
 			this.balance -= amount;
 		}else{
-			logger.trace("subAmount Error");
+			logger.error("subAmount Error");
 			throw new Exception("Operation error: sub");
 		}
 	}
 
 	@Override
 	public String toString() {
+		if(logger.isTraceEnabled())
+			logger.trace("toString()");
 		return "Client [id=" + id + ", name=" + name + ", balance=" + balance + "]";
 	}
 

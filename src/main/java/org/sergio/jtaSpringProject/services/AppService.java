@@ -20,23 +20,26 @@ public class AppService {
 	
 	public AppService() {
 		super();
+		if(logger.isTraceEnabled()){
+			logger.trace("AppService()");
+		}
 	}
 	
 	@Transactional
 	public void createClient(Client client){
+		if(logger.isTraceEnabled()){
+			logger.trace("createClient(Client client)");
+		}
 		this.clientService.saveClient(client);
 	}
 	
 	@Transactional
 	public void makeTransfer(Transfer transfer) throws Exception{
-		if(logger.isDebugEnabled()){
-			logger.debug("Begin transfer");
+		if(logger.isTraceEnabled()){
+			logger.trace("makeTransfer(Transfer transfer)");
 		}
 		transfer.makeTransfer();
 		this.transferService.saveTransfer(transfer);
-		if(logger.isDebugEnabled()){
-			logger.debug("Complete transfer");
-		}
 	}
 	
 }
