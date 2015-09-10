@@ -21,12 +21,10 @@
              xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd"
              version="2.1">
     <persistence-unit name="cdi-presistence-unit" transaction-type="JTA">
-        <jta-data-source>jdbc/ct</jta-data-source>
         <class>org.jtaSpringProject.entities.Client</class>
         <class>org.jtaSpringProject.entities.Transfer</class>
-        <exclude-unlisted-classes>true</exclude-unlisted-classes>
         <properties>
-            <property name="hibernate.hbm2ddl.auto" value="create-drop"/>
+            <property name="hibernate.hbm2ddl.auto" value="update"/>
             <property name="hibernate.show_sql" value="true"/>
         </properties>
     </persistence-unit>
